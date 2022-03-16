@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+<title> Driver Form
+</title>
+{% endblock %}
+
+{% block content %}
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/static/form/images/icons/.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/vendor/noui/nouislider.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/form/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/form/css/main.css">
+    <!--===============================================================================================-->
+    <!-- owl carousel css-->
+    <link rel="stylesheet" href="/static/form/css/solution/owl-carousel/assets/owl.carousel.min.css" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/bootstrap.min.css">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/style.css">
+</head>
+
+<div class="container-contact100">
+    <div class="wrap-contact100 col-lg-7" style="max-width: 900px;margin-bottom:100px;">
+
+        <span class="contact100-form-title">
+            Delete Series Form
+        </span>
+
+
+
+
+
+
+        <br>
+        
+
+        <form id="csvForm" class="col-lg-12" enctype="multipart/form-data" method="POST" style="margin:0 auto;display: none">
+            {% csrf_token %}
+            <div class=""  data-validate="">
+               <center> <font style="font-family: Lato-Bold;"><b>"Add .csv file"</b>  {{ form.file }}</font></center>
+            </div>
+        </form>
+
+
+        <form enctype="multipart/form-data" method="POST" id="driverForm" >
+            {% csrf_token %}
+
+            <div>
+                <center>
+                    <div id="vendorTypeButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px"
+                        class="button">Type</div>
+                </center>
+                <center>
+                    <div id="vendorSelectButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px;display: none"
+                        class="button">Select</div>
+                </center>
+
+
+                <div id="vendorTypeDiv" style='display:none'>
+                    <div id="vendor_type_value" class="wrap-input100 validate-input bg-light col-lg-9"
+                        style="margin:0 auto;border-radius: 20px;">
+                        {{ form.vendor|as_crispy_field }}
+                    </div>
+                </div>
+
+
+                <div id='vendorSelectDiv' class="col-lg-9 " style="margin:0 auto;text-align: center;padding:3px ">
+                    <select class="wrap-input100 button" style="text-align-last: center;margin-bottom:0;margin-top:0;"
+                        id="vendorSelectValue">
+                        <option selected="true" disabled="disabled" style="text-align-last: center;text-align: center">
+                            Select Vendor </option>
+                        {% for item in vendors %}
+                        <option class="multi-button" style="text-align-last: center;" value='{{item}}'>{{item}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div>
+                <center>
+                    <div id="deviceTypeButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px"
+                        class="button">Type</div>
+                </center>
+                <center>
+                    <div id="deviceSelectButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px;display: none"
+                        class="button">Select</div>
+                </center>
+
+
+                <div id="deviceTypeDiv" style='display:none'>
+                    <div id="device_type_value" class="wrap-input100 validate-input bg-light col-lg-9"
+                        style="margin:0 auto;border-radius: 20px;">
+                        {{ form.device|as_crispy_field }}
+                    </div>
+                </div>
+
+
+                <div id='deviceSelectDiv' class="col-lg-9 " style="margin:0 auto;text-align: center;padding:3px ">
+                    <select class="wrap-input100 button" style="text-align-last: center;margin-bottom:0;margin-top:0;"
+                        id="deviceSelectValue">
+                        <option selected="true" disabled="disabled" style="text-align-last: center;text-align: center">
+                            Select Device </option>
+                        {% for item in devices %}
+                        <option class="multi-button" style="text-align-last: center;" value='{{item}}'>{{item}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+
+
+            <div>
+                <center>
+                    <div id="modelTypeButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px"
+                        class="button">Type</div>
+                </center>
+                <center>
+                    <div id="modelSelectButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px;display: none"
+                        class="button">Select</div>
+                </center>
+
+
+                <div id="modelTypeDiv" style='display:none'>
+                    <div id="model_type_value" class="wrap-input100 validate-input bg-light col-lg-9"
+                        style="margin:0 auto;border-radius: 20px;">
+                        {{ form.model|as_crispy_field }}
+                    </div>
+                </div>
+
+
+                <div id='modelSelectDiv' class="col-lg-9 " style="margin:0 auto;text-align: center;padding:3px ">
+                    <select class="wrap-input100 button" style="text-align-last: center;margin-bottom:0;margin-top:0;"
+                        id="modelSelectValue">
+                        <option selected="true" disabled="disabled" style="text-align-last: center;text-align: center">
+                            Select Model</option>
+                        {% for item in models %}
+                        <option class="multi-button" style="text-align-last: center;" value='{{item}}'>{{item}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+            <div>
+                <center>
+                    <div id="osTypeButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px"
+                        class="button">Type</div>
+                </center>
+                <center>
+                    <div id="osSelectButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px;display: none"
+                        class="button">Select</div>
+                </center>
+
+
+                <div id="osTypeDiv" style='display:none'>
+                    <div id="osTypeValue" class="wrap-input100 validate-input bg-light col-lg-9"
+                        style="margin:0 auto;border-radius: 20px;">
+                        {{ form.operating_system|as_crispy_field }}
+                    </div>
+                </div>
+
+
+                <div id='osSelectDiv' class="col-lg-9 " style="margin:0 auto;text-align: center;padding:3px ">
+                    <select class="wrap-input100 button" style="text-align-last: center;margin-bottom:0;margin-top:0;"
+                        id="osSelectValue">
+                        <option selected="true" disabled="disabled" style="text-align-last: center;text-align: center">
+                            Select OS </option>
+                        {% for item in operating_systems %}
+                        <option class="multi-button" style="text-align-last: center;" value='{{item}}'>{{item}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div>
+                <center>
+                    <div id="seriesTypeButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px"
+                        class="button">Type</div>
+                </center>
+                <center>
+                    <div id="seriesSelectButton"
+                        style="width:80px;height:30px;padding-bottom: 27px;margin-left: 9px;border-radius: 10px;display: none"
+                        class="button">Select</div>
+                </center>
+
+
+                <div id="seriesTypeDiv" style='display:none'>
+                    <div id="seriesTypeValue" class="wrap-input100 validate-input bg-light col-lg-9"
+                        style="margin:0 auto;border-radius: 20px;">
+                        {{ form.series|as_crispy_field }}
+                    </div>
+                </div>
+
+
+                <div id='seriesSelectDiv' class="col-lg-9 " style="margin:0 auto;text-align: center;padding:3px ">
+                    <select class="wrap-input100 button" style="text-align-last: center;margin-bottom:0;margin-top:0;"
+                        id="seriesSelectValue">
+                        <option selected="true" disabled="disabled" style="text-align-last: center;text-align: center">
+                            Select Series </option>
+                        {% for item in serieses %}
+                        <option class="multi-button" style="text-align-last: center;" value='{{item}}'>{{item}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </form>
+
+
+        <hr>
+        <div class="button button-small button-red fill test-values contact100-form-btn col-lg-7 " style="margin:0 auto"
+            id="deleteSeriesButton">Delete Series
+            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+        </div>
+
+
+</div>
+
+
+    </div>
+
+
+
+
+
+    {% endblock %}
+
+
+
+
+    {% block script %}
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous"></script>
+    <script src="/static/que/js/multi.select.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script type="text/javascript" src="/static_folder/scripts.js"> </script> 
+    {% endblock %}

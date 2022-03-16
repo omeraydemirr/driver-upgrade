@@ -1,0 +1,468 @@
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head %}
+{% endblock %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="/static/que/css/multi.select.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href={% static "form/css/solution/css/bootstrap.min.css"%}>
+    <!-- custom CSS -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={% static "form/css/solution/css/bootstrap.min.css"%}>
+    <!-- custom CSS -->
+    <link rel="stylesheet" href={% static "form/css/solution/css/style.css" %}>
+
+
+
+
+	<link rel="icon" type="image/png" href="/static/form/images/icons/.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= {% static "form/vendor/bootstrap/css/bootstrap.min.css" %}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/fonts/font-awesome-4.7.0/css/font-awesome.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/fonts/iconic/css/material-design-iconic-font.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/animate/animate.css" %}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/css-hamburgers/hamburgers.min.css" %}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/animsition/css/animsition.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/select2/select2.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/daterangepicker/daterangepicker.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/noui/nouislider.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/css/util.css"%}>
+	<link rel="stylesheet" type="text/css" href={% static "form/css/main.css"%}>
+
+
+
+{% block style %}
+{% endblock %}
+
+<!--===============================================================================================-->
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12" id="gtco-main-nav">
+		<div class="container"><a href="/"><img src=""></a>
+			<button class="navbar-toggler" data-target="#my-nav" onclick="" data-toggle="collapse"><span
+					class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
+			<div id="my-nav" class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+	
+					<li class="nav-item"><a class="nav-link" href="/cloud/upload/" {% if "/cloud/upload/" != request.path %}style="font-weight: bold;"{% endif %}>
+							<div class="box"> Upload Driver</div>
+						</a>
+
+						
+					</li>
+					
+					<li class="nav-item"><a class="nav-link" href="/driver" {% if "/driver" != request.path %}style="font-weight: bold;" {% endif %}>
+							<div class="box">Add Series</div>
+						</a></li>
+	
+	
+	
+					<li class="nav-item"><a class="nav-link" href="/download" {% if "/download" != request.path %}style="font-weight: bold;" {% endif %}>
+							<div class="box">Download</div>
+						</a></li>
+	
+	
+					<li class="nav-item"><a class="nav-link" href="/deletedriver" {% if "/deletedriver" != request.path %}style="font-weight: bold;" {% endif %}>
+							<div class="box">Delete Driver</div>
+						</a></li>
+					<li class="nav-item"><a class="nav-link" href="/deleteseries" {% if "/deleteseries" != request.path %}style="font-weight: bold;" {% endif %}>
+							<div class="box">Delete Series</div>
+						</a></li>
+	
+				</ul>
+	
+			</div>
+		</div>
+	</nav>
+{% block content %}
+
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+	$(document).ready(function () {
+	
+		$('#csvButton').on("click", function (event) {
+			$("#driverForm").hide();
+			$(this).hide();
+			$("#csvForm").show();
+			$("#formButton").show();
+			$("#sendButton").hide();
+			$("#uploadButton").show();
+	
+		})
+		$('#formButton').on("click", function (event) {
+			$("#driverForm").show();
+			$(this).hide();
+			$("#csvForm").hide();
+			$("#csvButton").show();
+			$("#uploadButton").hide();
+			$("#sendButton").show();
+	
+		})
+	
+		
+	
+		$('#uploadButton').on("click", function (event){
+			var data = new FormData($('#csvForm').get(0));
+			data.append("file",$("#id_file")[0].files);
+			$.ajax({
+				type:"POST",
+				url: "{% url 'driver' %}",
+				data:data,
+				processData: false,
+					contentType: false,
+				headers: {
+						'X-CSRFToken': "{{ csrf_token }}"
+					},                
+				
+				success : function(){
+					alert("successs")
+				},
+				error : function(){
+	
+				}
+				})
+	
+		})
+	
+		$("#vendorSelectValue").change(function (e) {
+			e.preventDefault();
+			var select = document.getElementById("deviceSelectValue");
+			var length = select.options.length;
+			for (i = length - 1; i >= 1; i--) {
+				select.options[i] = null;
+			}
+	
+			let vendor = $(this).val();
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'driver' %}",
+				data: { vendor: vendor, option: 'vendor' },
+				headers: {
+					'X-CSRFToken': "{{ csrf_token }}",
+				},
+	
+				success: function (response) {
+	
+					hwJson = {};
+					hwArray = [];
+					for (hwItem of response.devices) {
+						hwJson[hwItem] = hwItem;
+						hwArray.push(hwItem);
+					}
+					var sel = document.getElementById('deviceSelectValue');
+					for (var i = 0; i < hwArray.length; i++) {
+						var opt = document.createElement('option');
+						opt.innerHTML = hwArray[i];
+						opt.value = hwArray[i];
+						sel.appendChild(opt);
+					}
+				}
+	
+			})
+		})
+	
+	
+		$("#deviceSelectValue").change(function (e) {
+			e.preventDefault();
+			var select = document.getElementById("modelSelectValue");
+			var length = select.options.length;
+			for (i = length - 1; i >= 1; i--) {
+				select.options[i] = null;
+			}
+	
+			let device = $(this).val();
+			let vendor = $('#vendorSelectValue').val()
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'driver' %}",
+				data: { device: device,vendor: vendor, option: 'device' },
+				headers: {
+					'X-CSRFToken': "{{ csrf_token }}",
+				},
+	
+				success: function (response) {
+	
+					modelJson = {};
+					modelArray = [];
+					for (modelItem of response.models) {
+						modelJson[modelItem] = modelItem;
+						modelArray.push(modelItem);
+					}
+					var sel = document.getElementById('modelSelectValue');
+					for (var i = 0; i < modelArray.length; i++) {
+						var opt = document.createElement('option');
+						opt.innerHTML = modelArray[i];
+						opt.value = modelArray[i];
+						sel.appendChild(opt);
+					}
+				}
+	
+			})
+		})
+	
+	
+		$("#modelSelectValue").change(function (e) {
+			e.preventDefault();
+			var select = document.getElementById("seriesSelectValue");
+			var length = select.options.length;
+			for (i = length - 1; i >= 1; i--) {
+				select.options[i] = null;
+			}
+	
+			let model = $(this).val();
+			let vendor = $('#vendorSelectValue').val();
+			let device = $('#deviceSelectValue').val();
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'driver' %}",
+				data: { model: model,vendor:vendor,device:device, option: 'model' },
+				headers: {
+					'X-CSRFToken': "{{ csrf_token }}",
+				},
+	
+				success: function (response) {
+	
+					osJson = {};
+					osArray = [];
+					for (osItem of response.operating_systems) {
+						osJson[modelItem] = osItem;
+						osArray.push(osItem);
+					}
+					var sel = document.getElementById('osSelectValue');
+					for (var i = 0; i < osArray.length; i++) {
+						var opt = document.createElement('option');
+						opt.innerHTML = osArray[i];
+						opt.value = osArray[i];
+						sel.appendChild(opt);
+					}
+				}
+	
+			})
+		})
+	
+	
+		$("#osSelectValue").change(function (e) {
+			e.preventDefault();
+			var select = document.getElementById("seriesSelectValue");
+			var length = select.options.length;
+			for (i = length - 1; i >= 1; i--) {
+				select.options[i] = null;
+			}
+	
+			let os = $(this).val();
+			let vendor = $('#vendorSelectValue').val();
+			let device = $('#deviceSelectValue').val();
+			let model = $('#modelSelectValue').val();
+	
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'driver' %}",
+				data: { os: os,vendor:vendor,device:device,model:model, option: 'os' },
+				headers: {
+					'X-CSRFToken': "{{ csrf_token }}",
+				},
+	
+				success: function (response) {
+	
+					seriesJson = {};
+					seriesArray = [];
+					for (seriesItem of response.serieses) {
+						seriesJson[modelItem] = seriesItem;
+						seriesArray.push(seriesItem);
+					}
+					var sel = document.getElementById('seriesSelectValue');
+					for (var i = 0; i < seriesArray.length; i++) {
+						var opt = document.createElement('option');
+						opt.innerHTML = seriesArray[i];
+						opt.value = seriesArray[i];
+						sel.appendChild(opt);
+					}
+				}
+	
+			})
+		})
+	
+	
+	
+		$('#sendButton').on("click", function (event) {
+			Swal.fire('Please wait');
+			Swal.showLoading();
+			event.preventDefault();
+	
+			const vendor = $('#id_vendor').val() != '' ? $('#id_vendor').val() : $('#vendorSelectValue').val()
+			const device = $('#id_device').val() != '' ? $('#id_device').val() : $('#deviceSelectValue').val()
+			const model = $('#id_model').val() != '' ? $('#id_model').val() : $('#modelSelectValue').val()
+			const series = $('#id_series').val() != '' ? $('#id_series').val() : $('#seriesSelectValue').val()
+			const os = $('#id_operating_system').val() != '' ? $('#id_operating_system').val() : $('#osSelectValue').val()
+			if (vendor === null || device === null || model === null || series === null || os === null) {
+				Swal.fire({
+					type: 'error',
+					title: 'All options must be filled!',
+				})
+			}
+			else {
+				$.ajax({
+					type: "POST",
+					url: "{% url 'driver' %}",
+					data: {
+						"vendor": vendor,
+						"device": device,
+						"model": model,
+						"series": series,
+						"os":os
+					},
+					headers: {
+						'X-CSRFToken': "{{ csrf_token }}"
+					},
+					success: function (response) {
+						var msg = "Values added successfully!";
+						Swal.fire({
+							title: msg,
+							type: 'success',
+							showCloseButton: true,
+						}).then((result) => {
+						});
+					},
+					error: function (response) {
+						console.log("response:          " + JSON.stringify(response))
+						var msg = "Failed adding values";
+						if (response.status === 409)
+							msg = "The item already exists";
+						Swal.fire({
+							type: 'error',
+							title: msg,
+						}).then((result) => {
+							//window.location.href = '';
+						})
+					},
+				})
+			}
+	
+		});
+	
+	});
+	
+	
+	
+	$('#vendorTypeButton').on('click', function (event) {
+		document.getElementById("vendorSelectValue").value = 'Select vendor';
+		$("#vendorTypeDiv").show();
+		$("#vendorSelectButton").show();
+		$("#vendorSelectDiv").hide();
+		$(this).hide();
+	});
+	
+	$('#vendorSelectButton').on('click', function (event) {
+		document.getElementById("id_vendor").value = '';
+		$("#vendorTypeDiv").hide();
+		$("#vendorTypeButton").show();
+		$("#vendorSelectDiv").show();
+		$(this).hide();
+	});
+	
+	
+	$('#deviceTypeButton').on('click', function (event) {
+		document.getElementById("deviceSelectValue").value = 'Select device';
+		$("#deviceTypeDiv").show();
+		$("#deviceSelectButton").show();
+		$("#deviceSelectDiv").hide();
+		$(this).hide();
+	});
+	
+	$('#deviceSelectButton').on('click', function (event) {
+		document.getElementById("id_device").value = '';
+		$("#deviceTypeDiv").hide();
+		$("#deviceTypeButton").show();
+		$("#deviceSelectDiv").show();
+		$(this).hide();
+	});
+	
+	
+	
+	
+	$('#modelTypeButton').on('click', function (event) {
+		document.getElementById("modelSelectValue").value = 'Select Model';
+		$("#modelTypeDiv").show();
+		$("#modelSelectButton").show();
+		$("#modelSelectDiv").hide();
+		$(this).hide();
+	});
+	
+	$('#modelSelectButton').on('click', function (event) {
+		document.getElementById("id_model").value = '';
+		$("#modelTypeDiv").hide();
+		$("#modelTypeButton").show();
+		$("#modelSelectDiv").show();
+		$(this).hide();
+	});
+	
+	$('#osTypeButton').on('click', function (event) {
+		document.getElementById("osSelectValue").value = 'Select OS';
+		$("#osTypeDiv").show();
+		$("#osSelectButton").show();
+		$("#osSelectDiv").hide();
+		$(this).hide();
+	});
+	
+	$('#osSelectButton').on('click', function (event) {
+		document.getElementById("id_operating_system").value = '';
+		$("#osTypeDiv").hide();
+		$("#osTypeButton").show();
+		$("#osSelectDiv").show();
+		$(this).hide();
+	});
+	
+	
+	$('#seriesTypeButton').on('click', function (event) {
+		document.getElementById("seriesSelectValue").value = 'Select Series';
+		$("#seriesTypeDiv").show();
+		$("#seriesSelectButton").show();
+		$("#seriesSelectDiv").hide();
+		$(this).hide();
+	});
+	
+	$('#seriesSelectButton').on('click', function (event) {
+		document.getElementById("id_series").value = '';
+		$("#seriesTypeDiv").hide();
+		$("#seriesTypeButton").show();
+		$("#seriesSelectDiv").show();
+		$(this).hide();
+	});
+	</script>
+	
+{% endblock %}
+
+<footer class="card-footer" style="background-image: linear-gradient(450deg, #000000, #244f6c);bottom: 0; padding: 8px; width: 100%; position: fixed; text-align: center; left: 0;z-index: 1000">
+    <div><a style="font-family:Lato-Bold;color: white;">Version: 0.1.1 </a></div>
+    <div style="font-family:Lato-Bold;color: white"><i class="fa fa-copyright fa-fw"></i>2022 by <a href="" target="_blank" style="font-family:Lato-Bold;color: white; font-size: 17px">Ömer Aydemir</a></div>
+</footer>
+
+</body>
+</html>

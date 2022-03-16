@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ömer | Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+    <link href="https://www.w3schools.com/lib/w3-theme-green.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    	<link rel="icon" type="image/png" href="/static/form/images/icons/.ico"%}/>
+
+</head>
+<style>
+
+    html,h1,h2,h3,h4,h5 {font-family:"Raleway", sans-serif}
+    body {
+        background-color: #1f1f1f;
+        font-family: "Raleway";
+    }
+    .alert {
+        color:  #f44336;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+    }
+
+    .alert.success { color: #4CAF50;}
+
+    .button {
+        background-color: #1f1f1f;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+ </style>
+
+<body>
+
+<div class="w3-main">
+
+    <div class="w3-container options w3-animate-left" id="login" style="margin-bottom: 50px;">
+        <div class="w3-panel w3-card w3-content" style="width: 364px; min-width: 364px; max-width: 364px; margin-top: 18%; border-radius: 5px; background-color: #E8F0FE;">
+            <div id="response_message" class="w3-container w3-center"></div>
+            <form id="loginform" href="auth" class="w3-container" method="POST">
+                <div>
+                    <p>
+                        <label style="color: #191919;"><i class="fa fa-user"></i> Username</label>
+                        <input class="w3-input w3-animate-input" name="login_username" id="login_username" type="text" style="border-radius: 5px;">
+                    </p>
+                    <p>
+                        <label style="color: #191919;"><i class="fa fa-key"></i> Password</label>
+                        <input class="w3-input w3-animate-input" name="login_password" id="login_password" type="password" style="border-radius: 5px;">
+                    </p>
+                    <div class="w3-center">
+                        <p>
+                            <button id="loginButton" class="button w3-button w3-round" type="submit"><i class="fa fa-sign-in"></i> LOG IN </button>
+                        </p>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

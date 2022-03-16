@@ -1,0 +1,10 @@
+venv/
+static_folder/form/css/solution
+static_folder/form/fonts
+static_folder/form/images
+static_folder/form/js
+static_folder/form/select2
+static_folder/form/vendor
+static_folder/que
+static_folder/form/
+.env
