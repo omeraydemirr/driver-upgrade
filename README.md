@@ -43,4 +43,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-[GNU 3.0](https://github.com/omercanaydemir/driver-upgrade/blob/69707a7d86dfe726f174ddd304af5a6daa102dd0/LICENSE)
+[GNU 3.0](https://github.com/omeraydemirr/driver-upgrade/blob/20574bfa70063ccf53e5fbc0084075671875a390/LICENSE)
