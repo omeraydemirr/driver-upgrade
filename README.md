@@ -1,12 +1,23 @@
 # Contents
 * [About](#about)
 * [Installation](#installation)
+* [Tools and Technologies](#tools-and-technologies)
 * [Main Features](#main-features)
 
 
 # About
 
-This sample web application, built on top of Django, is used to manage driver upgrades and connects to AWS Services tools like DynamoDB, S3, and Cognito. It allows you to upload, download, and delete drivers from manufacturers with any model, such as graphics cards, sound cards, or chipsets, as well as create and delete products.
+This sample web application, built on top of Django, is used to manage driver upgrades and connects to AWS Services. 
+It allows you to upload, download, and delete drivers from manufacturers with any model, such as graphics cards, sound cards, or chipsets, as well as create and delete products.
+
+## Tools and Technologies
+
+* DynamoDB
+* S3
+* Cognito (Optional)
+* Bootstrap
+* Sweetalerts
+* Ajax jQuery
 
 ## Installation
 
