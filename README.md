@@ -21,7 +21,7 @@ It allows you to upload, download, and delete drivers from manufacturers with an
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install:
 
 ```bash
 pip install -r requirements.txt
