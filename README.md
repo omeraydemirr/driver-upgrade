@@ -47,11 +47,5 @@ After included AWS Configurations to .env file and run server,tables and bucket 
 ### DynamoDb Table
 ![Dynamo Db](./static_folder/gitImages/dynamodb.png)
 
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
 ## License
 [GNU 3.0](https://github.com/omeraydemirr/driver-upgrade/blob/20574bfa70063ccf53e5fbc0084075671875a390/LICENSE)
